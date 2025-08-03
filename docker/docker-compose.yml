@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_cep_api
+      MYSQL_USER: santander
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  wiremock:
+    image: wiremock/wiremock:latest
+    container_name: wiremock-mock
+    ports:
+      - "8050:8080"
+    volumes:
+      - ./wiremock:/home/wiremock
+
+volumes:
+  mysql_data:
